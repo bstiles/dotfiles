@@ -102,6 +102,18 @@ fg_magenta_intense="${fg_magenta}${bold}"
 fg_cyan_intense="${fg_cyan}${bold}"
 fg_white_intense="${fg_white}${bold}"
 
+if [[ $TERM == *256* ]]; then
+    bg_dark_gray=$(tput setab 234)
+    bg_dark_gray_intense="${bg_dark_gray}${bold}"
+    fg_dark_gray=$(tput setaf 234)
+    fg_dark_gray_intense="${fg_dark_gray}${bold}"
+else
+    bg_dark_gray=$bg_black
+    bg_dark_gray_intense=$bg_black_intense
+    fg_dark_gray=$fg_black
+    fg_dark_gray_intense=$fg_black_intense
+fi
+
 # 2014-12-12 bstiles: tput sgr0 doesn't work under emacs for some
 # reason.
 if [ "$TERM" = "emacsclient" ]; then
@@ -116,11 +128,11 @@ function local_machine {
 
 function prompt_info {
     local EXIT=$?
-    local normal="\[${bg_black}${fg_white}\]"
-    local dim="\[${bg_black}${fg_black}\]"
-    local dim_highlight="\[${bg_black}${fg_yellow}\]"
-    local highlight="\[${bg_black}${fg_white_intense}\]"
-    local git_branch="\[${bg_black}${fg_cyan}\]"
+    local normal="\[${bg_dark_gray}${fg_white}\]"
+    local dim="\[${bg_dark_gray}${fg_black}\]"
+    local dim_highlight="\[${bg_dark_gray}${fg_yellow}\]"
+    local highlight="\[${bg_dark_gray}${fg_white_intense}\]"
+    local git_branch="\[${bg_dark_gray}${fg_cyan}\]"
     local error="\[${fg_red_intense}\]"
     local off="\[${default}\]"
 
@@ -147,7 +159,7 @@ function prompt_info {
             PS1+=" "
             ;;
     esac
-    PS1+="=================================================== ${normal}"
+    PS1+="=================================================== ${off}${normal}"
 
     # Time
     PS1+="[\A]"
@@ -155,6 +167,7 @@ function prompt_info {
 
     ## Location -----------------------
     # Working directory
+    PS1+="${normal}                                                                      ${off}\r"
     PS1+="${highlight}\w${off}"
 
     # Git Branch
@@ -174,7 +187,8 @@ function prompt_info {
         PS1+="${dim_highlight}Bash 3 "
     fi
 
-    if [[ ! "$0" =~ -.* ]]; then
+    if [[ ($TERM != emacsclient && ! "$0" =~ -.*) \
+           || ($TERM = emacsclient && $SHLVL -gt 1) ]]; then
         local nested="${dim_highlight}[nested]${normal} "
     fi
     
