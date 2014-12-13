@@ -4,6 +4,13 @@
 ## with sh). A good place for aliases and prompts.
 ##
 
+# 2014-12-12 bstiles: Make sure .profile is sourced in the case where
+# we've come in via 'ssh -t tmux' or the like.
+if [[ ! $- == *i* ]]; then
+    . /etc/profile
+    . "$HOME/.profile"
+fi
+
 # Warn if ~/bin/overrides isn't at the head of the PATH.
 [[ $(echo $PATH | tr : '\n' | head -1) =~ .*bin/overrides ]] \
     || cat <<EOF
