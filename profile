@@ -9,8 +9,10 @@
 # 2012-12-18 bstiles: Haskell goodies
 export PATH="$HOME/.cabal/bin:$PATH"
 
-# 20140610 bstiles: Add VMWare Fusion command line tools
+# 2014-06-10 bstiles: Add VMWare Fusion command line tools.
+# 2014-12-12 bstiles: Add Homebrew path.
 if [ "$(uname -s)" = "Darwin" ]; then
+    export PATH="/usr/local/bin:$PATH"
     export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 fi
 
