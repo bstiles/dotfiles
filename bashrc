@@ -159,8 +159,10 @@ function prompt_info {
         PS1+="${normal} [${git_branch}${branch}${off}${normal}]${off}"
     fi
 
-    # User and host
-    PS1+="${normal} \u@${dim_highlight}\h"
+    # User and host if not me on my primary box.
+    if [ $(id -un) != bstiles -o $(hostname -s) != Brians-MacBook-Pro ]; then
+        PS1+="${normal} \u@${dim_highlight}\h"
+    fi
     PS1+="${off}\n"
 
     ## Prompt -------------------------
