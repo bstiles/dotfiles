@@ -110,6 +110,10 @@ else
     default="$(tput $TERM_TYPE sgr0)"
 fi
     
+function local_machine {
+    [[ $(id -un) = bstiles && $(hostname -s) = Brians-MacBook-Pro ]]
+}
+
 function prompt_info {
     local EXIT=$?
     local normal="\[${bg_black}${fg_white}\]"
@@ -160,7 +164,7 @@ function prompt_info {
     fi
 
     # User and host if not me on my primary box.
-    if [ $(id -un) != bstiles -o $(hostname -s) != Brians-MacBook-Pro ]; then
+    if ! local_machine; then
         PS1+="${normal} \u@${dim_highlight}\h"
     fi
     PS1+="${off}\n"
@@ -177,5 +181,10 @@ function prompt_info {
     PS1+="${normal}${nested:-}${highlight}\\\$${off} "
     PS2="${normal} >${off} "
 }
-PROMPT_DIRTRIM=3
+# More room on the local machine with \u@\h in the prompt.
+if local_machine; then
+    PROMPT_DIRTRIM=5
+else
+    PROMPT_DIRTRIM=3
+fi
 PROMPT_COMMAND="prompt_info"
