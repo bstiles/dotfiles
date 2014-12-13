@@ -126,6 +126,10 @@ function local_machine {
     [[ $(id -un) = bstiles && $(hostname -s) = Brians-MacBook-Pro ]]
 }
 
+function in_emacs {
+    [[ $TERM = emacsclient || $TERM = eterm-color ]]
+}
+
 function prompt_info {
     local EXIT=$?
     local normal="\[${bg_dark_gray}${fg_white}\]"
@@ -167,7 +171,9 @@ function prompt_info {
 
     ## Location -----------------------
     # Working directory
-    PS1+="${normal}                                                                      ${off}\r"
+    if ! in_emacs; then
+        PS1+="${normal}                                                                      ${off}\r"
+    fi
     PS1+="${highlight}\w${off}"
 
     # Git Branch
@@ -187,8 +193,7 @@ function prompt_info {
         PS1+="${dim_highlight}Bash 3 "
     fi
 
-    if [[ ($TERM != emacsclient && ! "$0" =~ -.*) \
-           || ($TERM = emacsclient && $SHLVL -gt 1) ]]; then
+    if in_emacs && [[ $SHLVL -gt 1 ]] || ! in_emacs && [[ ! "$0" =~ -.* ]]; then
         local nested="${dim_highlight}[nested]${normal} "
     fi
     
