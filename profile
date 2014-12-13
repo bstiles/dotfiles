@@ -4,11 +4,15 @@
 ## when bash is used).
 ##
 
+[ -f "$HOME/.profile_local" ] && source "$HOME/.profile_local"
+
 # 2012-12-18 bstiles: Haskell goodies
 export PATH="$HOME/.cabal/bin:$PATH"
 
 # 20140610 bstiles: Add VMWare Fusion command line tools
-export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
+if [ "$(uname -s)" = "Darwin" ]; then
+    export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
+fi
 
 # Macports
 #export PATH=/opt/local/bin:/opt/local/sbin:$PATH
@@ -24,4 +28,5 @@ if [ "$(readlink $HOME/tmpdir)" != "$(dirname $TMPDIR)/$(basename $TMPDIR)" ]; t
     ln -sfn "$(dirname $TMPDIR)/$(basename $TMPDIR)" "$HOME/tmpdir"
 fi
 
-export JAVA_HOME=$(/usr/libexec/java_home -version 1.7)
+export JAVA_VERSION=1.7
+export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
