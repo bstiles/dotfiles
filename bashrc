@@ -58,7 +58,7 @@ function parse_git_branch {
     echo -n "$ref"
 }
 
-if [ -n "$TERM" ]; then
+if [ "${TERM:-dumb}" != "dumb" ]; then
     if [ "$TERM" = "emacsclient" ]; then
         TERM_TYPE=-Txterm-256color
     else
