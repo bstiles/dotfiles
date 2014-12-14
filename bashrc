@@ -58,70 +58,72 @@ function parse_git_branch {
     echo -n "$ref"
 }
 
-if [ "$TERM" = "emacsclient" ]; then
-    TERM_TYPE=-Txterm-256color
-else
-    TERM_TYPE=
+if [ -n "$TERM" ]; then
+    if [ "$TERM" = "emacsclient" ]; then
+        TERM_TYPE=-Txterm-256color
+    else
+        TERM_TYPE=
+    fi
+
+    bold=$(tput $TERM_TYPE bold)
+
+    bg_black=$(tput $TERM_TYPE setab 0)
+    bg_red=$(tput $TERM_TYPE setab 1)
+    bg_green=$(tput $TERM_TYPE setab 2)
+    bg_yellow=$(tput $TERM_TYPE setab 3)
+    bg_blue=$(tput $TERM_TYPE setab 4)
+    bg_magenta=$(tput $TERM_TYPE setab 5)
+    bg_cyan=$(tput $TERM_TYPE setab 6)
+    bg_white=$(tput $TERM_TYPE setab 7)
+
+    bg_black_intense="${bg_black}${bold}"
+    bg_red_intense="${bg_red}${bold}"
+    bg_green_intense="${bg_green}${bold}"
+    bg_yellow_intense="${bg_yellow}${bold}"
+    bg_blue_intense="${bg_blue}${bold}"
+    bg_magenta_intense="${bg_magenta}${bold}"
+    bg_cyan_intense="${bg_cyan}${bold}"
+    bg_white_intense="${bg_white}${bold}"
+
+    fg_black=$(tput $TERM_TYPE setaf 0)
+    fg_red=$(tput $TERM_TYPE setaf 1)
+    fg_green=$(tput $TERM_TYPE setaf 2)
+    fg_yellow=$(tput $TERM_TYPE setaf 3)
+    fg_blue=$(tput $TERM_TYPE setaf 4)
+    fg_magenta=$(tput $TERM_TYPE setaf 5)
+    fg_cyan=$(tput $TERM_TYPE setaf 6)
+    fg_white=$(tput $TERM_TYPE setaf 7)
+
+    fg_black_intense="${fg_black}${bold}"
+    fg_red_intense="${fg_red}${bold}"
+    fg_green_intense="${fg_green}${bold}"
+    fg_yellow_intense="${fg_yellow}${bold}"
+    fg_blue_intense="${fg_blue}${bold}"
+    fg_magenta_intense="${fg_magenta}${bold}"
+    fg_cyan_intense="${fg_cyan}${bold}"
+    fg_white_intense="${fg_white}${bold}"
+
+    if [[ $TERM == *256* ]]; then
+        bg_dark_gray=$(tput setab 234)
+        bg_dark_gray_intense="${bg_dark_gray}${bold}"
+        fg_dark_gray=$(tput setaf 234)
+        fg_dark_gray_intense="${fg_dark_gray}${bold}"
+    else
+        bg_dark_gray=$bg_black
+        bg_dark_gray_intense=$bg_black_intense
+        fg_dark_gray=$fg_black
+        fg_dark_gray_intense=$fg_black_intense
+    fi
+
+    # 2014-12-12 bstiles: tput sgr0 doesn't work under emacs for some
+    # reason.
+    if [ "$TERM" = "emacsclient" ]; then
+        default="\e[0m"
+    else
+        default="$(tput $TERM_TYPE sgr0)"
+    fi
 fi
 
-bold=$(tput $TERM_TYPE bold)
-
-bg_black=$(tput $TERM_TYPE setab 0)
-bg_red=$(tput $TERM_TYPE setab 1)
-bg_green=$(tput $TERM_TYPE setab 2)
-bg_yellow=$(tput $TERM_TYPE setab 3)
-bg_blue=$(tput $TERM_TYPE setab 4)
-bg_magenta=$(tput $TERM_TYPE setab 5)
-bg_cyan=$(tput $TERM_TYPE setab 6)
-bg_white=$(tput $TERM_TYPE setab 7)
-
-bg_black_intense="${bg_black}${bold}"
-bg_red_intense="${bg_red}${bold}"
-bg_green_intense="${bg_green}${bold}"
-bg_yellow_intense="${bg_yellow}${bold}"
-bg_blue_intense="${bg_blue}${bold}"
-bg_magenta_intense="${bg_magenta}${bold}"
-bg_cyan_intense="${bg_cyan}${bold}"
-bg_white_intense="${bg_white}${bold}"
-
-fg_black=$(tput $TERM_TYPE setaf 0)
-fg_red=$(tput $TERM_TYPE setaf 1)
-fg_green=$(tput $TERM_TYPE setaf 2)
-fg_yellow=$(tput $TERM_TYPE setaf 3)
-fg_blue=$(tput $TERM_TYPE setaf 4)
-fg_magenta=$(tput $TERM_TYPE setaf 5)
-fg_cyan=$(tput $TERM_TYPE setaf 6)
-fg_white=$(tput $TERM_TYPE setaf 7)
-
-fg_black_intense="${fg_black}${bold}"
-fg_red_intense="${fg_red}${bold}"
-fg_green_intense="${fg_green}${bold}"
-fg_yellow_intense="${fg_yellow}${bold}"
-fg_blue_intense="${fg_blue}${bold}"
-fg_magenta_intense="${fg_magenta}${bold}"
-fg_cyan_intense="${fg_cyan}${bold}"
-fg_white_intense="${fg_white}${bold}"
-
-if [[ $TERM == *256* ]]; then
-    bg_dark_gray=$(tput setab 234)
-    bg_dark_gray_intense="${bg_dark_gray}${bold}"
-    fg_dark_gray=$(tput setaf 234)
-    fg_dark_gray_intense="${fg_dark_gray}${bold}"
-else
-    bg_dark_gray=$bg_black
-    bg_dark_gray_intense=$bg_black_intense
-    fg_dark_gray=$fg_black
-    fg_dark_gray_intense=$fg_black_intense
-fi
-
-# 2014-12-12 bstiles: tput sgr0 doesn't work under emacs for some
-# reason.
-if [ "$TERM" = "emacsclient" ]; then
-    default="\e[0m"
-else
-    default="$(tput $TERM_TYPE sgr0)"
-fi
-    
 function local_machine {
     [[ $(id -un) = bstiles && $(hostname -s) = Brians-MacBook-Pro ]]
 }
@@ -206,4 +208,8 @@ if local_machine; then
 else
     PROMPT_DIRTRIM=3
 fi
-PROMPT_COMMAND="prompt_info"
+if [ -n "$TERM" ]; then
+    PROMPT_COMMAND="prompt_info"
+else
+    PS1='\u@\h \$'
+fi
