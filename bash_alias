@@ -1,0 +1,7 @@
+# For Homebrew Emacs
+alias emacsclient="/usr/local/bin/emacsclient"
+alias emacs="emacs --no-desktop"
+alias et="emacsclient -t"
+alias tree="tree -ACF"
+alias ls="ls -pFG"
+alias irlaeng10="ssh irlaeng10 -t tmux a"

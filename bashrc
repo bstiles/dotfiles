@@ -22,12 +22,7 @@ EOF
 
 set completion-ignore-case on
 
-# For Homebrew Emacs
-alias emacsclient="/usr/local/bin/emacsclient"
-alias emacs="emacs --no-desktop"
-alias tree="tree -ACF"
-alias ls="ls -pFG"
-alias irlaeng10="ssh irlaeng10 -t tmux a"
+. "$HOME/.bash_alias"
 
 if [ "$EMACS" = "t" ]
 then
