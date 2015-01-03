@@ -1,7 +1,29 @@
-# For Homebrew Emacs
-alias emacsclient="/usr/local/bin/emacsclient"
+# -*- mode: sh -*-
+
+######################################################################
+## Emacs
+
 alias emacs="emacs --no-desktop"
+alias emacsclient="/usr/local/bin/emacsclient"
 alias et="emacsclient -t"
-alias tree="tree -ACF"
+
+######################################################################
+## Miscellaneous
+
+alias irlaeng10="ssh -C irlaeng10 -t tmux a"
 alias ls="ls -pFG"
-alias irlaeng10="ssh irlaeng10 -t tmux a"
+
+if [[ $(uname -s) = Darwin ]]; then
+    alias top="top -o cpu"
+fi
+
+######################################################################
+## Vagrant
+
+[[ -x $(which vagrant) ]] && alias v="vagrant"
+
+######################################################################
+## Clojure
+
+export LEIN_FAST_TRAMPOLINE=y
+alias lein="lein trampoline"
