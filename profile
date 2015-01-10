@@ -26,7 +26,7 @@ export PATH="$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH"
 # 2013-07-23 bstiles: Force UTF8. psql under emacs behaves badly otherwise.
 PGCLIENTENCODING=UTF8
 
-if [ "$(readlink $HOME/tmpdir)" != "$(dirname $TMPDIR)/$(basename $TMPDIR)" ]; then
+if [ -n "$TMPDIR" -a "$(readlink $HOME/tmpdir)" != "$(dirname $TMPDIR)/$(basename $TMPDIR)" ]; then
     ln -sfn "$(dirname $TMPDIR)/$(basename $TMPDIR)" "$HOME/tmpdir"
 fi
 
