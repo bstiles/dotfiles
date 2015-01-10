@@ -10,7 +10,8 @@ alias et="emacsclient -t"
 ######################################################################
 ## Miscellaneous
 
-alias irlaeng10="ssh -C irlaeng10 -t tmux a"
+alias irlaeng10="ssh -C irlaeng10 -t tmux a -t 0"
+alias irlaeng10emacs="ssh -C irlaeng10 -t tmux a -t emacs"
 alias ls="ls -pFG"
 
 if [[ $(uname -s) = Darwin ]]; then
