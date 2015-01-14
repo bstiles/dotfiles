@@ -22,9 +22,3 @@ fi
 ## Vagrant
 
 [[ -x $(which vagrant) ]] && alias v="vagrant"
-
-######################################################################
-## Clojure
-
-export LEIN_FAST_TRAMPOLINE=y
-alias lein="lein trampoline"
