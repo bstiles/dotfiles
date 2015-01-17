@@ -33,3 +33,4 @@ fi
 export JAVA_VERSION=1.7
 export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
 export VAGRANT_VMWARE_CLONE_DIRECTORY=~/Vagrant
+export MACHINE_STORAGE_PATH=~/Machine
