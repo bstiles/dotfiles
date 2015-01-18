@@ -119,10 +119,6 @@ if [ "${TERM:-dumb}" != "dumb" ]; then
     fi
 fi
 
-function local_machine {
-    [[ $(id -un) = bstiles && $(hostname -s) = Brians-MacBook-Pro ]]
-}
-
 function in_emacs {
     [[ $TERM = emacsclient || $TERM = eterm-color ]]
 }
@@ -179,10 +175,7 @@ function prompt_info {
         PS1+="${normal} [${git_branch}${branch}${off}${normal}]${off}"
     fi
 
-    # User and host if not me on my primary box.
-    if ! local_machine; then
-        PS1+="${normal} \u@${dim_highlight}\h"
-    fi
+    PS1+="${normal} \u@${dim_highlight}\h"
     PS1+="${off}\n"
 
     ## Prompt -------------------------
@@ -197,12 +190,7 @@ function prompt_info {
     PS1+="${normal}${nested:-}${highlight}\\\$${off} "
     PS2="${normal} >${off} "
 }
-# More room on the local machine with \u@\h in the prompt.
-if local_machine; then
-    PROMPT_DIRTRIM=5
-else
-    PROMPT_DIRTRIM=3
-fi
+PROMPT_DIRTRIM=3
 if [ -n "$TERM" ]; then
     PROMPT_COMMAND="prompt_info"
 else
