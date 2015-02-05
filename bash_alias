@@ -22,3 +22,4 @@ fi
 ## Vagrant
 
 [[ -x $(which vagrant) ]] && alias v="vagrant"
+[[ -x $(which docker-machine) ]] && alias dm="docker-machine"
