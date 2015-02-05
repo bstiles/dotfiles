@@ -6,18 +6,12 @@
 
 [ -f "$HOME/.profile_local" ] && source "$HOME/.profile_local"
 
-# 2012-12-18 bstiles: Haskell goodies
-export PATH="$HOME/.cabal/bin:$PATH"
-
 # 2014-06-10 bstiles: Add VMWare Fusion command line tools.
 # 2014-12-12 bstiles: Add Homebrew path.
 if [ "$(uname -s)" = "Darwin" ]; then
     export PATH="/usr/local/bin:$PATH"
     export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 fi
-
-# Macports
-#export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
