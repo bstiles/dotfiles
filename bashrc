@@ -29,9 +29,7 @@ then
     TERM=emacsclient
 fi
 
-# if [ -f /opt/local/etc/bash_completion ]; then
-#     . /opt/local/etc/bash_completion
-# fi
+which emacsclient-t.sh >/dev/null && export VISUAL=$(which emacsclient-t.sh)
 
 ######################################################################
 ## Prompt
