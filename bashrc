@@ -4,6 +4,8 @@
 ## with sh). A good place for aliases and prompts.
 ##
 
+HISTCONTROL=ignorespace
+
 # 2014-12-12 bstiles: Make sure .profile is sourced in the case where
 # we've come in via 'ssh -t tmux' or the like.
 if [[ ! $- == *i* ]]; then
