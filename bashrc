@@ -26,6 +26,17 @@ set completion-ignore-case on
 
 . "$HOME/.bash_alias"
 
+######################################################################
+## GnuPG
+##
+
+GPG_TTY=$(tty)
+export GPG_TTY
+
+######################################################################
+## Emacs
+##
+
 if [ "$EMACS" = "t" ]
 then
     TERM=emacsclient
