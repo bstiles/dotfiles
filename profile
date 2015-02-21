@@ -9,7 +9,7 @@
 # 2014-06-10 bstiles: Add VMWare Fusion command line tools.
 # 2014-12-12 bstiles: Add Homebrew path.
 if [ "$(uname -s)" = "Darwin" ]; then
-    export PATH="/usr/local/bin:$PATH"
+    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
     export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 fi
 
