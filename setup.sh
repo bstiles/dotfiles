@@ -2,9 +2,9 @@
 shopt -s extglob
 set -o errexit
 set -o nounset
+unset CDPATH
 
 here=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
-config_dir=dotfiles
 
 function abort {
     [ $# -gt 0 ] && echo "$*"
@@ -16,10 +16,6 @@ cat <<EOF
 usage: $(basename "$0")
 
 Sets up Bash and tmux initialization files on a new machine.
-
-The initialization repository '$config_dir' must exist under
-$HOME.
-
 EOF
 }
 
@@ -30,9 +26,6 @@ function abort_and_display_help {
 }
 
 [[ ${1-} = @(--help|-h) ]] && display_help && exit 0
-
-[ -d "$HOME/$config_dir" ] \
-    || abort_and_display_help "It appears that '$config_dir' isn't in the right location."
 
 echo "Linking/writing initialization files to $HOME..."
 
@@ -47,6 +40,8 @@ if [ "$(uname -s)" = "Darwin" ]; then
 else
     export READLINK='readlink -f'
 fi
+
+config_dir=${here#$HOME/}
 
 for x in ${files[@]}; do
     if [ -L "$HOME/.$x" -a "$($READLINK "$HOME/.$x")" = "$config_dir/$x" ]; then
