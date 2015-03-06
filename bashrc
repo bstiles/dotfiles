@@ -4,7 +4,12 @@
 ## with sh). A good place for aliases and prompts.
 ##
 
-HISTCONTROL=ignorespace
+shopt -s histappend
+HISTSIZE=1000
+HISTFILESIZE=5000
+HISTCONTROL=ignoreboth
+HISTIGNORE='ls:bg:fg:history'
+HISTTIMEFORMAT='%m-%d %H:%M  '
 
 # 2014-12-12 bstiles: Make sure .profile is sourced in the case where
 # we've come in via 'ssh -t tmux' or the like.
@@ -135,6 +140,10 @@ function in_emacs {
 }
 
 function prompt_info {
+    # Append to history on every command.
+    history -a
+
+    # Beautify the prompt.
     local EXIT=$?
     local normal="\[${bg_dark_gray}${fg_white}\]"
     local dim="\[${bg_dark_gray}${fg_black}\]"
