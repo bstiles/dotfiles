@@ -140,9 +140,6 @@ function in_emacs {
 }
 
 function prompt_info {
-    # Append to history on every command.
-    history -a
-
     # Beautify the prompt.
     local EXIT=$?
     local normal="\[${bg_dark_gray}${fg_white}\]"
@@ -152,6 +149,9 @@ function prompt_info {
     local git_branch="\[${bg_dark_gray}${fg_cyan}\]"
     local error="\[${fg_red_intense}\]"
     local off="\[${default}\]"
+
+    # Append to history on every command.
+    history -a
 
     ## Previous command stats ---------
     # Gutter
