@@ -1,0 +1,10 @@
+new-session -d
+send-keys 'cd ~/iRise/Projects/bnw' enter
+split-window -h
+send-keys 'cd ~/iRise/Projects/bnw/demo/integrations' enter
+new-window
+split-window
+new-window
+split-window -h
+select-window -t 1
+select-pane -t 1.0

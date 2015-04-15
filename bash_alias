@@ -8,6 +8,11 @@ alias emacsclient="/usr/local/bin/emacsclient"
 alias et="emacsclient -t"
 
 ######################################################################
+## tmux
+
+alias tm="tmux source-file $MY_DOTFILES_DIR/tmux.main"
+
+######################################################################
 ## Miscellaneous
 
 alias irlaeng10="ssh -C irlaeng10 -t tmux a -t 0"
