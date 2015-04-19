@@ -13,11 +13,21 @@ alias et="emacsclient -t"
 alias tm="tmux source-file $MY_DOTFILES_DIR/tmux.main"
 
 ######################################################################
+## File system
+
+alias ls="ls -pFG"
+alias tree="tree -C -I '*~'"
+
+######################################################################
+## Project management
+
+alias st="start-here"
+
+######################################################################
 ## Miscellaneous
 
 alias irlaeng10="ssh -C irlaeng10 -t tmux a -t 0"
 alias irlaeng10copy="ssh -C irlaeng10 tmux save-buffer - | pbcopy"
-alias ls="ls -pFG"
 
 if [[ $(uname -s) = Darwin ]]; then
     alias top="top -o cpu"
