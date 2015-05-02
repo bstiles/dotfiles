@@ -19,9 +19,14 @@ alias ls="ls -pFG"
 alias tree="tree -C -I '*~'"
 
 ######################################################################
+## Process management
+
+alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+
+######################################################################
 ## Project management
 
-alias st="start-here"
+alias p="project-commands"
 
 ######################################################################
 ## Miscellaneous
