@@ -29,7 +29,7 @@ function abort_and_display_help {
 
 echo "Linking/writing initialization files to $HOME..."
 
-files=(bash_alias bashrc bash_profile profile tmux.conf)
+files=(bash_alias bashrc bash_profile inputrc profile tmux.conf)
 if [ "$(uname -s)" = "Darwin" ]; then
     files=(${files[@]} tmux-osx.conf)
 fi
