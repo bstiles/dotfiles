@@ -13,7 +13,7 @@
 abs_real_path() {
     local bn=$(basename -- "${1:?abs_real_path called without argument}")
     local dn=$(dirname -- "$1")
-    declare -il depth=0
+    local depth=0
     while [[ -L "$dn/$bn" ]]; do
         (( depth++ < 10 )) || {
             echo CYCLICAL LINK: "$dn/$bn" 1>&2
