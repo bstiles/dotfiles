@@ -4,44 +4,45 @@
 ## when bash is used).
 ##
 
-[ -f "$HOME/.profile_local" ] && source "$HOME/.profile_local"
-
-######################################################################
-## Cross platform support
-##
-
-if [ "$(uname -s)" = "Darwin" ]; then
-    export READLINK=readlink
-    export STAT='stat -f %Um'
-else
-    export READLINK='readlink -f'
-    export STAT='stat -c %Y'
-fi
+[[ -f $HOME/.profile_local ]] && source "$HOME/.profile_local"
 
 ######################################################################
 ## Paths
 ##
 
-function abs_real_path {
-    local f="${1:?abs_real_path called without argument}"
-    f="$(cd "$(dirname -- "$f")" && pwd)/$(basename -- "$f")"
-    if [ -L "$f" ]; then
-        (
-            allowed_depth=10
-            x=$f
-            while [ -L "$x" ]; do
-                [[ $allowed_depth = 0 ]] \
-                    && abort $ERR_MAX_LINK_DEPTH_EXCEEDED
-                cd "$(dirname -- "$x")"
-                cd "$(dirname -- "$($READLINK "$x")")"
-                x="$(pwd)/$(basename -- "$($READLINK "$x")")"
-                allowed_depth=$(($allowed_depth-1))
-            done
-            printf %s "$(cd "$(dirname -- "$x")" && pwd)/$(basename -- "$x")"
-        )
-    else
-        printf %s "$(cd "$(dirname -- "$1")" && pwd)/$(basename -- "$1")"
-    fi
+abs_real_path() {
+    local bn=$(basename -- "${1:?abs_real_path called without argument}")
+    local dn=$(dirname -- "$1")
+    declare -il depth=0
+    while [[ -L "$dn/$bn" ]]; do
+        (( depth++ < 10 )) || {
+            echo CYCLICAL LINK: "$dn/$bn" 1>&2
+            printf %s $'\0'
+            return 1
+        }
+        local l=$(readlink -- "$dn/$bn")
+        bn=$(basename -- "$l")
+        if [[ $l =~ ^/ ]]; then
+            dn=$(dirname -- "$l")
+        else
+            dn=$dn/$(dirname -- "$l")
+        fi
+    done
+    abs_dn=$(cd -- "$dn" && pwd -P)
+    [[ $abs_dn ]] || {
+        printf %s $'\0'
+        return 64
+    }
+    printf %s/%s "$abs_dn" "$bn"
+}
+
+real_base_name() {
+    basename -- "$(abs_real_path "${1:?real_base_name called without argument}")"
+}
+
+abs_path() {
+    local f=${1:?abs_path called without argument}
+    printf %s/%s "$(cd "$(dirname -- "$f")" && pwd)" "$(basename -- "$f")"
 }
 
 ######################################################################
@@ -50,7 +51,7 @@ function abs_real_path {
 
 # 2014-06-10 bstiles: Add VMWare Fusion command line tools.
 # 2014-12-12 bstiles: Add Homebrew path.
-if [ "$(uname -s)" = "Darwin" ]; then
+if [[ $(uname -s) = Darwin ]]; then
     export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
     export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
 fi
@@ -64,9 +65,9 @@ export PATH="$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH"
 ##
 
 # 2013-07-23 bstiles: Force UTF8. psql under emacs behaves badly otherwise.
-PGCLIENTENCODING=UTF8
+export PGCLIENTENCODING=UTF8
 
-if [ -n "$TMPDIR" -a "$($READLINK $HOME/tmpdir)" != "$(dirname $TMPDIR)/$(basename $TMPDIR)" ]; then
+if [[ ${TMPDIR-} && $(readlink "$HOME/tmpdir") != $(dirname -- "$TMPDIR")/$(basename -- "$TMPDIR") ]]; then
     ln -sfn "$(dirname $TMPDIR)/$(basename $TMPDIR)" "$HOME/tmpdir"
 fi
 
@@ -74,4 +75,4 @@ export JAVA_VERSION=1.8
 export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
 export VAGRANT_VMWARE_CLONE_DIRECTORY=~/Vagrant
 export MACHINE_STORAGE_PATH=~/Machine
-export MY_DOTFILES_DIR=$(dirname "$(abs_real_path "$BASH_SOURCE")")
+export MY_DOTFILES_DIR=$(dirname -- "$(abs_real_path "${BASH_SOURCE[0]}")")
