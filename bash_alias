@@ -31,7 +31,7 @@ alias p="project-commands"
 ######################################################################
 ## Miscellaneous
 
-alias irlaeng10="ssh -C irlaeng10 -t tmux a -t 0"
+alias irlaeng10="ssh -A irlaeng10 -t tmux a"
 alias irlaeng10copy="ssh -C irlaeng10 tmux save-buffer - | pbcopy"
 
 if [[ $(uname -s) = Darwin ]]; then
