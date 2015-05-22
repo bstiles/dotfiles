@@ -8,6 +8,11 @@ alias emacsclient="/usr/local/bin/emacsclient"
 alias et="emacsclient -t"
 
 ######################################################################
+## Git
+
+alias g="git"
+
+######################################################################
 ## tmux
 
 alias tm="tmux source-file $MY_DOTFILES_DIR/tmux.main"
