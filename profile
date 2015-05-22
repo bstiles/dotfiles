@@ -52,13 +52,20 @@ abs_path() {
 # 2014-06-10 bstiles: Add VMWare Fusion command line tools.
 # 2014-12-12 bstiles: Add Homebrew path.
 if [[ $(uname -s) = Darwin ]]; then
-    export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-    export PATH="$PATH:/Applications/VMware Fusion.app/Contents/Library"
+    PATH=/usr/local/bin:/usr/local/sbin:$PATH
+    PATH=$PATH:"/Applications/VMware Fusion.app/Contents/Library"
+fi
+
+# 2015-05-19 bstiles: OCaml support
+if [[ -d $HOME/.opam/system/bin ]]; then
+    PATH=$HOME/.opam/system/bin:$PATH
+    # OPAM configuration
+    . /Users/bstiles/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 fi
 
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
-export PATH="$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH"
+PATH=$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH
 
 ######################################################################
 ## Environment
