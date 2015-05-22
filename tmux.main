@@ -1,4 +1,4 @@
-new-session -d
+new-session -d -s bg
 send-keys 'cd ~/iRise/Projects/bnw' enter
 split-window -h
 send-keys 'cd ~/iRise/Projects/bnw/demo/integrations' enter
