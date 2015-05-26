@@ -19,7 +19,7 @@ if [[ ! $- == *i* ]]; then
 fi
 
 # Warn if ~/bin/overrides isn't at the head of the PATH.
-[[ $(echo $PATH | tr : '\n' | head -1) =~ .*bin/overrides ]] \
+[[ ${1-} == ignore-path || $(echo $PATH | tr : '\n' | head -1) =~ .*bin/overrides ]] \
     || cat <<EOF
 WARNING!
 WARNING!
@@ -210,6 +210,7 @@ function prompt_info {
     PS1+="${normal}${nested:-}${highlight}\\\$${off} "
     PS2="${normal} >${off} "
 }
+
 PROMPT_DIRTRIM=3
 if [ -n "$TERM" ]; then
     PROMPT_COMMAND="prompt_info"
