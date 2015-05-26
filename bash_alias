@@ -13,6 +13,11 @@ alias et="emacsclient -t"
 alias g="git"
 
 ######################################################################
+## Make
+
+alias m="make -j 3"
+
+######################################################################
 ## tmux
 
 alias tm="tmux source-file $MY_DOTFILES_DIR/tmux.main"
