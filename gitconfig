@@ -1,0 +1,95 @@
+# -*- mode: conf -*-
+[user]
+name = Brian Stiles
+# Specified in $HOME/.config/git/config for overriding under ~/iRise
+#	email =
+
+[core]
+excludesfile = /Users/bstiles/.gitignore
+editor = emacsclient -t
+pager = less -R
+
+[help]
+format = web
+
+[color]
+diff = auto
+
+[github]
+user = bstiles
+token = e779ba6bfe01ffa4d9b72e9bd375a46f
+
+[alias]
+l = log --max-count=24 \
+        --pretty=tformat:'%Cred%h%Creset %Cgreen%>(14)(%cr) %C(cyan)%<(12,trunc)<%an>%Creset -%C(yellow)%d%Creset %s' \
+        --abbrev-commit \
+        --date=relative
+lg = !git l --graph
+ld = !git l --simplify-by-decoration
+li = ls-files --others --ignored --exclude-standard
+s = status
+ediff = !"\
+outdir=$TMPDIR/diff-$(date +%Y%m%d%H%M%S); \
+manifest=$outdir/$(basename -- \"$PWD\")-working-diff.org; \
+[[ -e $outdir ]] && exit 64; \
+mkdir -p $outdir; \
+[[ -d $outdir ]] || exit 65; \
+git diff --name-status --find-renames HEAD | \
+while read f; do \
+    [[ $f ]] || continue; \
+    [[ -f $manifest ]] || printf %s '#    -*- mode: org; comment-start: nil; org-confirm-elisp-link-function: nil -*-\n' > $manifest; \
+    info=($(echo \"$f\" \
+        | awk -e '/^R/ && NF == 3 { print \"R\", $2, $3 }' \
+              -e '/^[^R]/ { print $0 }')); \
+    if [[ -z ${info[@]-} ]]; then \
+        printf '%s\n' \"$f\" >> $manifest; \
+        continue; \
+    fi; \
+    if [[ ${info[0]:0:1} == R ]]; then \
+        orig=${info[1]}; \
+        new=${info[2]}; \
+        title=\"$orig -> $new\"; \
+    else \
+        orig=${info[@]:1}; \
+        new=$orig; \
+        title=\"$orig\"; \
+    fi; \
+    if [[ ${info[0]:0:1} == A ]]; then \
+        printf '[[file:%s][+++ %s]]\n' \"$PWD/$new\" \"$new\"; \
+    else \
+        mkdir -p \"$(dirname -- $outdir/\"$orig\")\"; \
+        git show HEAD:\"$orig\" > $outdir/\"$orig\" || echo 66; \
+        printf '[[elisp:(ediff-files \"%s\" \"%s\")][%s %s]]\n' \
+               $outdir/\"$orig\" \
+               \"$PWD/$new\" \
+               \"$(if [[ -f \"$PWD/$new\" ]]; then \
+                      echo '   '; \
+                   else \
+                      echo '---'; \
+                   fi)\" \
+               \"$title\"; \
+    fi >> $manifest; \
+done; \
+if [[ -f $manifest ]]; then \
+    open -a Emacs.app; \
+    emacsclient -n $manifest; \
+else \
+    echo No files to diff.; \
+fi"
+
+lb = !git lg \
+$(git for-each-ref \
+      --format='%(upstream:short)' \
+      refs/heads/${1-$(git rev-parse --abbrev-ref HEAD)})\
+..\
+${1-$(git rev-parse --abbrev-ref HEAD)}
+
+lu = !git lg \
+${1-$(git rev-parse --abbrev-ref HEAD)}\
+..\
+$(git for-each-ref \
+      --format='%(upstream:short)' \
+      refs/heads/${1-$(git rev-parse --abbrev-ref HEAD)})
+
+[web]
+browser = open
