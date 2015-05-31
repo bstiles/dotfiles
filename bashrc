@@ -32,6 +32,12 @@ set completion-ignore-case on
 . "$HOME/.bash_alias"
 
 ######################################################################
+## AWS completion
+##
+
+which aws >/dev/null && complete -C aws_completer aws
+
+######################################################################
 ## GnuPG
 ##
 
