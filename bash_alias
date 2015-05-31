@@ -22,6 +22,11 @@ alias m="make -j 3"
 ## tmux
 
 alias tm="tmux source-file $MY_DOTFILES_DIR/tmux.main"
+alias tmux='if [[ $SSH_AUTH_SOCK && $SSH_AUTH_SOCK != ~/.ssh/ssh_auth_sock ]]; then \
+    ln -sf $SSH_AUTH_SOCK ~/.ssh/ssh_auth_sock; \
+fi; \
+tmux'
+
 
 ######################################################################
 ## File system
