@@ -1,10 +1,10 @@
-new-session -d -s bg
-send-keys 'cd ~/iRise/Projects/bnw' enter
+new-session -d -s bg -c ~/iRise/Projects/bnw ./shell
+send-keys 'cd ~/iRise/Projects/bnw; ./shell' enter
 split-window -h
-send-keys 'cd ~/iRise/Projects/bnw/demo/integrations' enter
+send-keys 'cd ~/iRise/Projects/bnw; ./shell' enter
 new-window
 split-window
-new-window
+new-window -c ~/iRise/Projects/bnw/Envs/Vagrant/ubuntu-14.10
 split-window -h
 select-window -t 1
 select-pane -t 1.0
