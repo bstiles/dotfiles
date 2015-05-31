@@ -35,9 +35,9 @@ alias tree="tree -C -I '*~'"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 
 ######################################################################
-## Project management
+## Shell output
 
-alias p="project-commands"
+alias less="less -XFR"
 
 ######################################################################
 ## Miscellaneous
