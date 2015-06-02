@@ -10,7 +10,7 @@ editor = emacsclient -t
 pager = less -R
 
 [help]
-format = web
+format = man
 
 [color]
 diff = auto
