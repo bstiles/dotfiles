@@ -16,7 +16,7 @@ alias g="git"
 ######################################################################
 ## Make
 
-alias m="make -j 3"
+alias m="make -j $(sysctl -n hw.ncpu)"
 
 ######################################################################
 ## tmux
@@ -38,6 +38,8 @@ alias tree="tree -C -I '*~'"
 ## Process management
 
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
+alias psp="ps -ax -o pid,pgid,ppid,command"
+alias pspg="ps -ax -o pid,pgid,ppid,command | grep -v grep | grep -i -e VSZ -e"
 
 ######################################################################
 ## Shell output
@@ -49,6 +51,7 @@ alias less="less -XFR"
 
 alias irlaeng10="ssh -A irlaeng10 -t 'tmux a || tmux'"
 alias irlaeng10copy="ssh -C irlaeng10 tmux save-buffer - | pbcopy"
+alias irlaeng11="ssh -A irlaeng11 -t 'tmux a || tmux'"
 
 if [[ $(uname -s) = Darwin ]]; then
     alias top="top -o cpu"
