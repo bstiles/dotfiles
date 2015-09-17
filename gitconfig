@@ -15,6 +15,11 @@ format = man
 [color]
 diff = auto
 
+[color.diff]
+frag = white reverse
+meta = reverse
+func = bold
+
 [github]
 user = bstiles
 token = e779ba6bfe01ffa4d9b72e9bd375a46f
@@ -28,13 +33,14 @@ lg = !git l --graph
 ld = !git l --simplify-by-decoration
 li = ls-files --others --ignored --exclude-standard
 s = status
-ediff = !"\
+ediff = "!f() { \
+commit=${1-HEAD}; \
 outdir=$TMPDIR/diff-$(date +%Y%m%d%H%M%S); \
 manifest=$outdir/$(basename -- \"$PWD\")-working-diff.org; \
 [[ -e $outdir ]] && exit 64; \
 mkdir -p $outdir; \
 [[ -d $outdir ]] || exit 65; \
-git diff --name-status --find-renames HEAD | \
+git diff --name-status --find-renames $commit | \
 while read f; do \
     [[ $f ]] || continue; \
     [[ -f $manifest ]] || printf %s '#    -*- mode: org; comment-start: nil; org-confirm-elisp-link-function: nil -*-\n' > $manifest; \
@@ -58,7 +64,7 @@ while read f; do \
         printf '[[file:%s][+++ %s]]\n' \"$PWD/$new\" \"$new\"; \
     else \
         mkdir -p \"$(dirname -- $outdir/\"$orig\")\"; \
-        git show HEAD:\"$orig\" > $outdir/\"$orig\" || echo 66; \
+        git show $commit:\"$orig\" > $outdir/\"$orig\" || echo 66; \
         printf '[[elisp:(ediff-files \"%s\" \"%s\")][%s %s]]\n' \
                $outdir/\"$orig\" \
                \"$PWD/$new\" \
@@ -75,7 +81,8 @@ if [[ -f $manifest ]]; then \
     emacsclient -n $manifest; \
 else \
     echo No files to diff.; \
-fi"
+fi; \
+}; f"
 
 lb = !git lg \
 $(git for-each-ref \
