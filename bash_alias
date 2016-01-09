@@ -5,13 +5,19 @@
 
 alias emacs="emacs --no-desktop"
 alias emacsclient="/usr/local/bin/emacsclient"
-alias ep='/Users/bstiles/bin/on-the-path/emacs-pipe.pl'
+alias ec="emacsclient -n"
+alias ep=~/bin/on-the-path/emacs-pipe.pl
 alias et="emacsclient -t"
 
 ######################################################################
 ## Git
 
 alias g="git"
+# 2015-11-02 bstiles: Protect against typos when trying to run the
+# 'git status' abbreviation 'g s'
+if [[ -x ~/bin/gs ]]; then
+    alias gs=~/bin/gs
+fi
 
 ######################################################################
 ## Make

@@ -63,6 +63,11 @@ if [[ -d $HOME/.opam/system/bin ]]; then
     . /Users/bstiles/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
 fi
 
+# 2015-10-26 bstiles: TeX support
+if [[ -d /usr/texbin ]]; then
+    PATH=/usr/texbin:$PATH
+fi
+
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
 PATH=$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH
