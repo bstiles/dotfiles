@@ -51,6 +51,7 @@ alias pspg="ps -ax -o pid,pgid,ppid,command | grep -v grep | grep -i -e VSZ -e"
 ## Shell output
 
 alias less="less -XFR"
+alias follow="less --follow-name -S +F"
 
 ######################################################################
 ## Miscellaneous
