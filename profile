@@ -55,13 +55,12 @@ if [[ $(uname -s) = Darwin ]]; then
     PATH=/usr/local/bin:/usr/local/sbin:$PATH
     PATH=$PATH:"/Applications/VMware Fusion.app/Contents/Library"
 fi
-
 # 2015-05-19 bstiles: OCaml support
 if [[ -d $HOME/.opam/system/bin ]]; then
-    PATH=$HOME/.opam/system/bin:$PATH
     # OPAM configuration
     . /Users/bstiles/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
     eval $(opam config env)
+    PATH=$HOME/.opam/system/bin:$PATH
 fi
 
 # 2015-10-26 bstiles: TeX support
