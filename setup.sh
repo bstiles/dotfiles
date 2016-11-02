@@ -27,7 +27,6 @@ keys_volume=/Volumes/Keys
 mounted_evidence=KEYS_VOLUME_IS_MOUNTED
 
 keys_mapping=(
-    "$keys_volume"                    .keys
     .keys/AWS                         .aws
     .keys/Docker/dockercfg            .dockercfg
     .keys/GitHub/github_token_bstiles .github_token_bstiles
@@ -173,6 +172,11 @@ main() {
 
     [[ ${with_keys-} != true || -f $keys_volume/$mounted_evidence ]] \
         || abort "$keys_volume is not mounted."
+
+    [[ ${with_keys-} != true \
+        || "$("$READLINK" $HOME/.keys)" == $keys_volume ]] \
+        || abort "Run 'ln -s $keys_volume $HOME/.keys' first."
+
     sanity_check "${files_mapping[@]}"
     sanity_check "${keys_mapping[@]}"
 
