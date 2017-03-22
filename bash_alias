@@ -56,9 +56,9 @@ alias follow="less --follow-name -S +F"
 ######################################################################
 ## Miscellaneous
 
-alias irlaeng10="ssh -A irlaeng10 -t 'tmux a || tmux'"
-alias irlaeng10copy="ssh -C irlaeng10 tmux save-buffer - | pbcopy"
-alias irlaeng11="ssh -A irlaeng11 -t 'tmux a || tmux'"
+alias irlaeng10="ssh -A irlaeng10.corp.irise.com -t 'tmux a || tmux'"
+alias irlaeng10copy="ssh -C irlaeng10.corp.irise.com tmux save-buffer - | pbcopy"
+alias irlaeng11="ssh -A irlaeng11.corp.irise.com -t 'tmux a || tmux'"
 
 if [[ $(uname -s) = Darwin ]]; then
     alias top="top -o cpu"

@@ -7,7 +7,7 @@ name = Brian Stiles
 [core]
 excludesfile = /Users/bstiles/.gitignore
 editor = emacsclient -t
-pager = less -R
+pager = less -XFR
 autocrlf = false
 
 [help]
