@@ -83,7 +83,6 @@ if [[ ${TMPDIR-} && $(readlink "$HOME/tmpdir") != $(dirname -- "$TMPDIR")/$(base
     ln -sfn "$(dirname $TMPDIR)/$(basename $TMPDIR)" "$HOME/tmpdir"
 fi
 
-export ANDROID_HOME=/usr/local/opt/android-sdk
 export JAVA_VERSION=1.8
 export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
 export VAGRANT_VMWARE_CLONE_DIRECTORY=~/Vagrant

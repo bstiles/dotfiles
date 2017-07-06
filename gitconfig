@@ -1,6 +1,7 @@
 # -*- mode: conf -*-
 [user]
-name = Brian Stiles
+	name = Brian Stiles
+	email = bstiles@bstiles.net
 # Specified in $HOME/.config/git/config for overriding under ~/iRise
 #	email =
 
@@ -52,8 +53,8 @@ while read f; do \
     [[ $f ]] || continue; \
     [[ -f $manifest ]] || printf %s '#    -*- mode: org; comment-start: nil; org-confirm-elisp-link-function: nil -*-\n' > $manifest; \
     info=($(echo \"$f\" \
-        | awk -e '/^R/ && NF == 3 { print \"R\", $2, $3 }' \
-              -e '/^[^R]/ { print $0 }')); \
+        | gawk -e '/^R/ && NF == 3 { print \"R\", $2, $3 }' \
+               -e '/^[^R]/ { print $0 }')); \
     if [[ -z ${info[@]-} ]]; then \
         printf '%s\n' \"$f\" >> $manifest; \
         continue; \

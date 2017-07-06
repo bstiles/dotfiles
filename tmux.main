@@ -1,6 +1,5 @@
-send-keys -t 1.0 'cd ~/iRise/Projects/bnw; ./run shell' enter
 split-window -h
-send-keys -t 1.1 'cd ~/iRise/Projects/bnw; ./run shell' enter
+# send-keys -t 1.1 'cd ~/iRise/Projects/bnw; ./run shell' enter
 new-window
 split-window -h -t 2
 select-window -t 1
