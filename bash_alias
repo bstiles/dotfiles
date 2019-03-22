@@ -25,6 +25,11 @@ fi
 alias m="make -j $(sysctl -n hw.ncpu)"
 
 ######################################################################
+## Gradle
+
+alias gw="~/bin/overrides/gradlew"
+
+######################################################################
 ## tmux
 
 alias tm="tmux source-file $MY_DOTFILES_DIR/tmux.main"
@@ -66,7 +71,7 @@ fi
 ######################################################################
 ## Vagrant
 
-[[ -x $(which vagrant) ]] && alias v="vagrant"
+# [[ -x $(which vagrant) ]] && alias v="vagrant"
 
 ######################################################################
 ## Docker

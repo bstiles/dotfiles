@@ -49,6 +49,9 @@ abs_path() {
 ## Path
 ##
 
+# 2019-03-22 bstiles: Start with base path.
+PATH=$(echo $(cat /etc/paths) | tr ' ' :)
+
 # 2014-06-10 bstiles: Add VMWare Fusion command line tools.
 # 2014-12-12 bstiles: Add Homebrew path.
 if [[ $(uname -s) = Darwin ]]; then
@@ -60,13 +63,14 @@ if [[ -d $HOME/.opam/system/bin ]]; then
     # OPAM configuration
     . /Users/bstiles/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true
     eval $(opam config env)
-    PATH=$HOME/.opam/system/bin:$PATH
 fi
 
-# 2015-10-26 bstiles: TeX support
-if [[ -d /usr/texbin ]]; then
-    PATH=/usr/texbin:$PATH
+# 2018-08-08 bstiles: BacicTeX
+if [[ -d /usr/local/texlive/2018/bin/x86_64-darwin ]]; then
+    PATH=/usr/local/texlive/2018/bin/x86_64-darwin:$PATH
 fi
+
+eval `/usr/libexec/path_helper -s`
 
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
@@ -83,7 +87,7 @@ if [[ ${TMPDIR-} && $(readlink "$HOME/tmpdir") != $(dirname -- "$TMPDIR")/$(base
     ln -sfn "$(dirname $TMPDIR)/$(basename $TMPDIR)" "$HOME/tmpdir"
 fi
 
-export JAVA_VERSION=1.8
+export JAVA_VERSION=11.0
 export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
 export VAGRANT_VMWARE_CLONE_DIRECTORY=~/Vagrant
 export MACHINE_STORAGE_PATH=~/Machine

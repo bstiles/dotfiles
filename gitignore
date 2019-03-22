@@ -1,34 +1,48 @@
-.repl/
-.svn/
-.hg/
+######################################################################
+## Clojure (minimal)
+
+.nrepl-port
+.rebl
 target/
+
+## END Emacs
+##^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+######################################################################
+## Emacs
+
+.dir-locals.el
 .projectile
-.checkstyle
-.classpath
-.project
-.settings/
-test-output/
-runner/
-META-INF/MANIFEST.MF
-META-INF/maven
+.#*
+\#*
 *~
+
+## END Emacs
+##^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+######################################################################
+## Miscellaneous
+
 tmp.*
 nohup.out
 .DS_Store
-repl-port
-.dir-locals.el
-.nrepl-port
-.nrepl-history
-\#*
-.#*
-.vagrant/
-node.env
 
-#iRise specific
+## END Miscellaneous
+##^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+######################################################################
+## VCS
+
+.svn/
+.hg/
 .hgignore
-.pmd
-.fbprefs
-.ruleset
-widgetLog.txt
-xjc/
-velocity.log
+
+## END VCS
+
+######################################################################
+## CCM
+
+.cloudbox_address
+
+## END Miscellaneous
+##^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

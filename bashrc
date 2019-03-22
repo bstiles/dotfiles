@@ -6,11 +6,13 @@
 
 shopt -s histappend
 HISTSIZE=1000
-HISTFILESIZE=5000
+HISTFILESIZE=50000
 HISTCONTROL=ignoreboth
 HISTIGNORE='ls:bg:fg:history'
 HISTTIMEFORMAT='%m-%d %H:%M  '
 
+PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
+               "$(history 1)" >> ~/.bash_eternal_history'
 # 2014-12-12 bstiles: Make sure .profile is sourced in the case where
 # we've come in via 'ssh -t tmux' or the like.
 if [[ ! $- == *i* ]]; then
@@ -47,7 +49,7 @@ then
     TERM=emacsclient
 fi
 
-which emacsclient-t.sh >/dev/null && export VISUAL=$(which emacsclient-t.sh)
+which emacsclient-t.sh >/dev/null && export VISUAL=$(which emacsclient-t.sh) || true
 
 ######################################################################
 ## Prompt
@@ -214,6 +216,11 @@ function prompt_info {
 PROMPT_DIRTRIM=3
 if [ -n "$TERM" ]; then
     PROMPT_COMMAND="prompt_info"
+    # 2018-02-12 bstiles: Siphon prior commands off to
+    # ~/.bash_eternal_history as a backup since the Bash history
+    # mechanism has edge cases that obliterate history for multiple
+    # sessions.
+    PROMPT_COMMAND="${PROMPT_COMMAND};"'echo $$ $USER "$(builtin history 1)" >> ~/.bash_eternal_history'
 else
     PS1='\u@\h \$'
 fi
