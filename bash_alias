@@ -78,6 +78,7 @@ fi
 
 [[ -x $(which docker) ]] && {
     alias d="docker"
+    alias dc="docker-compose"
     alias drm="docker run --rm -it"
 }
 [[ -x $(which docker-machine) ]] && alias dm="docker-machine"

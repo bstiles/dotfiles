@@ -1,6 +1,7 @@
 ######################################################################
 ## Clojure (minimal)
 
+.cpcache
 .nrepl-port
 .rebl
 target/
@@ -44,5 +45,5 @@ nohup.out
 
 .cloudbox_address
 
-## END Miscellaneous
+## END CCM
 ##^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

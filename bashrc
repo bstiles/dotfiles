@@ -15,7 +15,7 @@ PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
                "$(history 1)" >> ~/.bash_eternal_history'
 # 2014-12-12 bstiles: Make sure .profile is sourced in the case where
 # we've come in via 'ssh -t tmux' or the like.
-if [[ ! $- == *i* ]]; then
+if [[ ! $- == *i* && ! ${__no_profile-} ]]; then
     . /etc/profile
     . "$HOME/.profile"
 fi
@@ -208,7 +208,7 @@ function prompt_info {
     if in_emacs && [[ $SHLVL -gt 1 ]] || ! in_emacs && [[ ! "$0" =~ -.* ]]; then
         local nested="${dim_highlight}[nested]${normal} "
     fi
-    
+
     PS1+="${normal}${nested:-}${highlight}\\\$${off} "
     PS2="${normal} >${off} "
 }
