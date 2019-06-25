@@ -65,6 +65,9 @@ if [[ -d $HOME/.opam/system/bin ]]; then
     eval $(opam config env)
 fi
 
+# 2019-06-25 bstiles: Rust
+PATH=$HOME/.cargo/bin:$PATH
+
 # 2018-08-08 bstiles: BacicTeX
 if [[ -d /usr/local/texlive/2018/bin/x86_64-darwin ]]; then
     PATH=/usr/local/texlive/2018/bin/x86_64-darwin:$PATH
