@@ -29,8 +29,6 @@ WARNING! ~/bin/overrides is not at the head of PATH. Check ~/.bash_profile for t
 WARNING!
 EOF
 
-set completion-ignore-case on
-
 . "$HOME/.bash_alias"
 
 ######################################################################
