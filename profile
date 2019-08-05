@@ -75,6 +75,9 @@ fi
 
 eval `/usr/libexec/path_helper -s`
 
+# 2019-07-13 bstiles: GNU make
+PATH=/usr/local/opt/make/libexec/gnubin:$PATH
+
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
 PATH=$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH
