@@ -22,7 +22,11 @@ fi
 ######################################################################
 ## Make
 
-alias m="make -j $(sysctl -n hw.ncpu)"
+if [[ $(uname -s) = Darwin ]]; then
+    alias m="make -j $(sysctl -n hw.ncpu)"
+elif [[ -x lscpu ]]; then
+    alias m="make -j $(lscpu --parse=CPU | grep -v '^#' | wc -l)"
+fi
 
 ######################################################################
 ## Gradle
@@ -42,7 +46,7 @@ tmux'
 ######################################################################
 ## File system
 
-alias ls="ls -pFG"
+alias ls="ls -pFG --color=auto"
 alias tree="tree -C -I '*~'"
 
 ######################################################################
@@ -51,6 +55,13 @@ alias tree="tree -C -I '*~'"
 alias psg="ps aux | grep -v grep | grep -i -e VSZ -e"
 alias psp="ps -ax -o pid,pgid,ppid,command"
 alias pspg="ps -ax -o pid,pgid,ppid,command | grep -v grep | grep -i -e VSZ -e"
+
+######################################################################
+## Grep color
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
 
 ######################################################################
 ## Shell output

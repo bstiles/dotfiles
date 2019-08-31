@@ -50,7 +50,13 @@ abs_path() {
 ##
 
 # 2019-03-22 bstiles: Start with base path.
-PATH=$(echo $(cat /etc/paths) | tr ' ' :)
+if [[ -f /etc/paths && -r /etc/paths ]]; then
+    PATH=$(echo $(cat /etc/paths) | tr ' ' :)
+elif [[ -f /etc/environment && -r /etc/environment ]]; then
+    PATH=$(eval $(cat /etc/environment); echo "$PATH")
+else
+    echo PATH=/usr/bin:/usr/sbin:/bin:/sbin
+fi
 
 # 2014-06-10 bstiles: Add VMWare Fusion command line tools.
 # 2014-12-12 bstiles: Add Homebrew path.
@@ -73,10 +79,14 @@ if [[ -d /usr/local/texlive/2018/bin/x86_64-darwin ]]; then
     PATH=/usr/local/texlive/2018/bin/x86_64-darwin:$PATH
 fi
 
-eval `/usr/libexec/path_helper -s`
+if [[ -x /usr/libexec/path_helper ]]; then
+    eval `/usr/libexec/path_helper -s`
+fi
 
 # 2019-07-13 bstiles: GNU make
-PATH=/usr/local/opt/make/libexec/gnubin:$PATH
+if [[ -x /usr/local/opt/make/libexec/gnubin ]]; then
+    PATH=/usr/local/opt/make/libexec/gnubin:$PATH
+fi
 
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
@@ -93,8 +103,9 @@ if [[ ${TMPDIR-} && $(readlink "$HOME/tmpdir") != $(dirname -- "$TMPDIR")/$(base
     ln -sfn "$(dirname $TMPDIR)/$(basename $TMPDIR)" "$HOME/tmpdir"
 fi
 
-export JAVA_VERSION=11.0
-export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
-export VAGRANT_VMWARE_CLONE_DIRECTORY=~/Vagrant
+if [[ -x /usr/libexec/java_home ]]; then
+    export JAVA_VERSION=11.0
+    export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
+fi
 export MACHINE_STORAGE_PATH=~/Machine
 export MY_DOTFILES_DIR=$(dirname -- "$(abs_real_path "${BASH_SOURCE[0]}")")

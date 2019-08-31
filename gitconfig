@@ -6,7 +6,7 @@
 #	email =
 
 [core]
-excludesfile = /Users/bstiles/.gitignore
+excludesfile = ~/.gitignore
 editor = emacsclient -t
 pager = less -XFR
 autocrlf = false
