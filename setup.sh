@@ -178,7 +178,7 @@ main() {
         || abort "Run 'ln -s $keys_volume $HOME/.keys' first."
 
     sanity_check "${files_mapping[@]}"
-    sanity_check "${keys_mapping[@]}"
+    [[ ${with_key-} != true ]] || sanity_check "${keys_mapping[@]}"
 
     echo "Linking/writing initialization files to $HOME..."
     setup "${files_mapping[@]}"
