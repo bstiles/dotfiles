@@ -93,3 +93,8 @@ fi
     alias drm="docker run --rm -it"
 }
 [[ -x $(which docker-machine) ]] && alias dm="docker-machine"
+
+######################################################################
+## Remote commands
+
+alias l='ssh linux'
