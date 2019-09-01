@@ -98,3 +98,4 @@ fi
 ## Remote commands
 
 alias l='ssh linux'
+alias lin='$HOME/bin/on-the-path/ssh-linux-in.sh'
