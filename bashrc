@@ -4,8 +4,6 @@
 ## with sh). A good place for aliases and prompts.
 ##
 
-TERM=screen-256color
-
 shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=50000

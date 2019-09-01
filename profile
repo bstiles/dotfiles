@@ -6,6 +6,8 @@
 
 [[ -f $HOME/.profile_local ]] && source "$HOME/.profile_local"
 
+export TERM=screen-256color
+
 ######################################################################
 ## Paths
 ##
