@@ -6,7 +6,9 @@
 
 [[ -f $HOME/.profile_local ]] && source "$HOME/.profile_local"
 
-export TERM=screen-256color
+if [[ ${LC_TERMINAL-} == iTerm2 ]]; then
+    export TERM=screen-256color
+fi
 
 ######################################################################
 ## Paths
