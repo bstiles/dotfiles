@@ -46,7 +46,11 @@ tmux'
 ######################################################################
 ## File system
 
-alias ls="gls -pF --color=auto"
+if [[ $(uname -s) = Darwin ]]; then
+    alias ls="gls -pF --color=auto"
+else
+    alias ls="ls -pF --color=auto"
+fi
 alias tree="tree -C -I '*~'"
 
 ######################################################################
