@@ -46,7 +46,7 @@ tmux'
 ######################################################################
 ## File system
 
-alias ls="ls -pFG --color=auto"
+alias ls="gls -pF --color=auto"
 alias tree="tree -C -I '*~'"
 
 ######################################################################
@@ -91,6 +91,7 @@ fi
     alias d="docker"
     alias dc="docker-compose"
     alias drm="docker run --rm -it"
+    alias drmb="docker run --rm -it --entrypoint bash"
 }
 [[ -x $(which docker-machine) ]] && alias dm="docker-machine"
 

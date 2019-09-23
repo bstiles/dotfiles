@@ -42,6 +42,7 @@ ld = !git l --simplify-by-decoration \
             --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an %C(yellow)%D%C(reset) %s'
 lda = !git ld --graph --date-order --all
 li = ls-files --others --ignored --exclude-standard
+lnm = !git l --no-merges
 s = status
 ediff = "!f() { \
 commit=${1-HEAD}; \

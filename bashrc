@@ -246,3 +246,11 @@ if [ -n "$TERM" ]; then
 else
     PS1='\u@\h \$'
 fi
+
+if $(which bs) > /dev/null; then
+    if [[ $(which bs) != $(readlink "$(which bs)") ]]; then
+        source "$(dirname "$(which bs)")/$(readlink "$(which bs)")"-completion.sh
+    else
+        source "$(which bs)"-completion.sh
+    fi
+fi
