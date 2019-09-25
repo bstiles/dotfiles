@@ -4,7 +4,7 @@
 ## Emacs
 
 alias emacs="emacs --no-desktop"
-alias emacsclient="/usr/local/bin/emacsclient"
+alias emacsclient="$(bash -lc 'which emacsclient')"
 alias ec="emacsclient -n"
 alias ep=~/bin/on-the-path/emacs-pipe.pl
 alias et="emacsclient -t"
