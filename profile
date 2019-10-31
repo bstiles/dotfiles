@@ -112,7 +112,7 @@ if [[ ${TMPDIR-} && $(readlink "$HOME/tmpdir") != $(dirname -- "$TMPDIR")/$(base
 fi
 
 if [[ -x /usr/libexec/java_home ]]; then
-    export JAVA_VERSION=11.0
+    export JAVA_VERSION=13.0
     export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
 fi
 export MACHINE_STORAGE_PATH=~/Machine
