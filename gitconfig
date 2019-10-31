@@ -29,13 +29,9 @@ token = e779ba6bfe01ffa4d9b72e9bd375a46f
 [alias]
 common-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 l = log \
-        --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an%C(reset) %s %C(yellow)%D%C(reset)' \
+        --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an%C(reset) %<(50,trunc)%s %C(yellow)%D%C(reset)' \
         --abbrev-commit \
         --date=relative
-# l = log --max-count=24 \
-#         --pretty=tformat:'%Cred%h%Creset %Cgreen%>(14)(%cr) %C(cyan)%<(12,trunc)<%an>%Creset - %s %C(yellow)%D%Creset' \
-#         --abbrev-commit \
-#         --date=relative
 lg = !git l --graph --date-order
 lga = !git l --graph --date-order --all
 ld = !git l --simplify-by-decoration \
