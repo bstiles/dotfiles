@@ -78,6 +78,9 @@ fi
 # 2019-06-25 bstiles: Rust
 PATH=$HOME/.cargo/bin:$PATH
 
+# 2019-12-29 bstiles: GNU ARM EMbedded
+PATH=$PATH:$HOME/Development/Toolchains/gcc-arm-none-eabi/bin
+
 # 2018-08-08 bstiles: BacicTeX
 if [[ -d /usr/local/texlive/2018/bin/x86_64-darwin ]]; then
     PATH=/usr/local/texlive/2018/bin/x86_64-darwin:$PATH
