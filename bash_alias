@@ -23,9 +23,9 @@ fi
 ## Make
 
 if [[ $(uname -s) = Darwin ]]; then
-    alias m="make -j $(sysctl -n hw.ncpu)"
+    alias mj="make -j $(sysctl -n hw.ncpu)"
 elif [[ -x lscpu ]]; then
-    alias m="make -j $(lscpu --parse=CPU | grep -v '^#' | wc -l)"
+    alias mj="make -j $(lscpu --parse=CPU | grep -v '^#' | wc -l)"
 fi
 
 ######################################################################
@@ -104,3 +104,13 @@ fi
 
 alias l='ssh linux'
 alias lin='$HOME/bin/on-the-path/ssh-linux-in.sh'
+
+######################################################################
+## Nim
+
+alias nr='nim c -r --verbosity:0 --hints:off'
+
+######################################################################
+## Monkey
+
+alias m=monkey
