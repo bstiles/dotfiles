@@ -71,13 +71,13 @@ then
     TERM=emacsclient
 fi
 
-which emacsclient-t.sh >/dev/null && export VISUAL=$(which emacsclient-t.sh) || true
+command -v emacsclient-t.sh >/dev/null && export VISUAL=$(command -v emacsclient-t.sh) || true
 
 ######################################################################
 ## Prompt
 ##
 
-GIT=$(which git)
+GIT=$(command -v git)
 
 function parse_git_branch {
     if [ -z "$GIT" ]; then return; fi
@@ -247,10 +247,10 @@ else
     PS1='\u@\h \$'
 fi
 
-if $(which bs) > /dev/null; then
-    if [[ $(which bs) != $(readlink "$(which bs)") ]]; then
-        source "$(dirname "$(which bs)")/$(readlink "$(which bs)")"-completion.sh
+if [[ -x $(command -v bs) ]]; then
+    if [[ $(command -v bs) != $(readlink "$(command -v bs)") ]]; then
+        source "$(dirname "$(command -v bs)")/$(readlink "$(command -v bs)")"-completion.sh
     else
-        source "$(which bs)"-completion.sh
+        source "$(command -v bs)"-completion.sh
     fi
 fi
