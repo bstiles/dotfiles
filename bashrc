@@ -35,8 +35,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
-               "$(history 1)" >> ~/.bash_eternal_history'
 # 2014-12-12 bstiles: Make sure .profile is sourced in the case where
 # we've come in via 'ssh -t tmux' or the like.
 if [[ ! $- == *i* && ! ${__no_profile-} ]]; then
@@ -45,7 +43,7 @@ if [[ ! $- == *i* && ! ${__no_profile-} ]]; then
 fi
 
 # Warn if ~/bin/overrides isn't at the head of the PATH.
-[[ ${1-} == ignore-path || $(echo $PATH | tr : '\n' | head -1) =~ .*bin/overrides ]] \
+[[ ${1-} == ignore-path || ${CURRENT_CONTEXT-} || $(echo $PATH | tr : '\n' | head -1) =~ .*bin/overrides ]] \
     || cat <<EOF
 WARNING!
 WARNING!
@@ -229,15 +227,31 @@ function prompt_info {
 
     if in_emacs && [[ $SHLVL -gt 1 ]] || ! in_emacs && [[ ! "$0" =~ -.* ]]; then
         local nested="${dim_highlight}[nested]${normal} "
+    else
+        local nested="${dim_highlight}[1]${normal} "
     fi
 
     PS1+="${normal}${nested:-}${highlight}\\\$${off} "
     PS2="${normal} >${off} "
 }
 
+project_prompt() {
+    # prompt_info must be the first statement.
+    prompt_info
+    echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history
+    local off="\[${default}\]"
+    local highlight="${bg_dark_gray}${fg_white_intense}"
+    local normal="${bg_dark_gray}${fg_white}"
+    local tag=${CURRENT_CONTEXT:+$(tr -cd '[:alnum:]_.:' <<< "$CURRENT_CONTEXT")}
+    PS1=$(sed -E \
+              -e 's/\[nested]/['$(( SHLVL - 1 ))'] '$tag'/' \
+              -e 's/\\\$/>/' \
+              <<< "$PS1")
+}
+
 PROMPT_DIRTRIM=3
 if [ -n "$TERM" ]; then
-    PROMPT_COMMAND="prompt_info"
+    PROMPT_COMMAND=project_prompt
     # 2018-02-12 bstiles: Siphon prior commands off to
     # ~/.bash_eternal_history as a backup since the Bash history
     # mechanism has edge cases that obliterate history for multiple
