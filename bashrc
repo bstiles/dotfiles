@@ -9,7 +9,7 @@ HISTSIZE=1000
 HISTFILESIZE=50000
 HISTCONTROL=ignoreboth
 HISTIGNORE='ls:bg:fg:history'
-HISTTIMEFORMAT='%m-%d %H:%M  '
+HISTTIMEFORMAT='%F %T  '
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
