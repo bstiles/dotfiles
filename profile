@@ -11,8 +11,10 @@ if [[ ${LC_TERMINAL-} == iTerm2 ]]; then
 fi
 
 # 2020-02-06 bstiles: Initialize lmod (http://lmod.readthedocs.org/)
-source /usr/local/opt/lmod/init/profile
-export LMOD_COLORIZE=YES
+if [[ -d /usr/local/opt/lmod/init/profile ]]; then
+    source /usr/local/opt/lmod/init/profile
+    export LMOD_COLORIZE=YES
+fi
 
 ######################################################################
 ## Paths
