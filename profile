@@ -10,6 +10,10 @@ if [[ ${LC_TERMINAL-} == iTerm2 ]]; then
     export TERM=screen-256color
 fi
 
+# 2020-02-06 bstiles: Initialize lmod (http://lmod.readthedocs.org/)
+source /usr/local/opt/lmod/init/profile
+export LMOD_COLORIZE=YES
+
 ######################################################################
 ## Paths
 ##
