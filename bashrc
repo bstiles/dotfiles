@@ -261,10 +261,10 @@ else
     PS1='\u@\h \$'
 fi
 
-if [[ -x $(command -v bs) ]]; then
-    if [[ $(command -v bs) != $(readlink "$(command -v bs)") ]]; then
-        source "$(dirname "$(command -v bs)")/$(readlink "$(command -v bs)")"-completion.sh
+if [[ -x $(command -v monkey) ]]; then
+    if [[ $(command -v monkey) != $(readlink "$(command -v monkey)") ]]; then
+        source "$(dirname "$(command -v monkey)")/$(readlink "$(command -v monkey)")"-completion.sh
     else
-        source "$(command -v bs)"-completion.sh
+        source "$(command -v monkey)"-completion.sh
     fi
 fi
