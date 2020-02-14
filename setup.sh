@@ -16,6 +16,7 @@ files_mapping=(
     ./$config_dir/inputrc      $HOME/.inputrc
     ./$config_dir/profile      $HOME/.profile
     ./$config_dir/tmux.conf    $HOME/.tmux.conf
+    ./$config_dir/fzf.bash     $HOME/.fzf.bash
 )
 
 if [[ $(uname -s) == Darwin ]]; then

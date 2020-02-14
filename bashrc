@@ -35,6 +35,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# 2020-02-12 bstiles: FZF config
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # 2014-12-12 bstiles: Make sure .profile is sourced in the case where
 # we've come in via 'ssh -t tmux' or the like.
 if [[ ! $- == *i* && ! ${__no_profile-} ]]; then
