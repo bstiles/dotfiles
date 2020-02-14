@@ -265,9 +265,5 @@ else
 fi
 
 if [[ -x $(command -v monkey) ]]; then
-    if [[ $(command -v monkey) != $(readlink "$(command -v monkey)") ]]; then
-        source "$(dirname "$(command -v monkey)")/$(readlink "$(command -v monkey)")"-completion.sh
-    else
-        source "$(command -v monkey)"-completion.sh
-    fi
+    source "$(monkey --completions-script)"
 fi
