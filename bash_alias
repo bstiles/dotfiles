@@ -114,4 +114,5 @@ alias nr='nim c -r --verbosity:0 --hints:off'
 ## Monkey
 
 alias m=$HOME/bin/on-the-path/monkey
+alias mt="$HOME/bin/on-the-path/monkey test"
 alias sk="$HOME/bin/on-the-path/monkey as sk -c"
