@@ -105,6 +105,11 @@ if [[ -d /snap/bin ]]; then
     PATH=/snap/bin:$PATH
 fi
 
+# 2020-03-07 bstiles: LinuxBrew
+if [[ $(uname -s) == Linux && -f /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+    eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
 PATH=$HOME/bin/overrides:$HOME/bin/on-the-path:$PATH
