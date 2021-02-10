@@ -8,15 +8,16 @@ here=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 config_dir=${here#$HOME/}
 
 files_mapping=(
-    ./$config_dir/bash_alias   $HOME/.bash_alias
-    ./$config_dir/bashrc       $HOME/.bashrc
-    ./$config_dir/bash_profile $HOME/.bash_profile
-    ./$config_dir/gitconfig    $HOME/.gitconfig
-    ./$config_dir/gitignore    $HOME/.gitignore
-    ./$config_dir/inputrc      $HOME/.inputrc
-    ./$config_dir/profile      $HOME/.profile
-    ./$config_dir/tmux.conf    $HOME/.tmux.conf
-    ./$config_dir/fzf.bash     $HOME/.fzf.bash
+    ./$config_dir/bash_alias                $HOME/.bash_alias
+    ./$config_dir/bashrc                    $HOME/.bashrc
+    ./$config_dir/bash_profile              $HOME/.bash_profile
+    ./$config_dir/gitconfig                 $HOME/.gitconfig
+    ./$config_dir/gitignore                 $HOME/.gitignore
+    ./$config_dir/inputrc                   $HOME/.inputrc
+    ./$config_dir/profile                   $HOME/.profile
+    ./$config_dir/tmux.conf                 $HOME/.tmux.conf
+    ./$config_dir/fzf.bash                  $HOME/.fzf.bash
+    ./$config_dir/fzf-fix-key-bindings.bash $HOME/.fzf-fix-key-bindings.bash
 )
 
 if [[ $(uname -s) == Darwin ]]; then

@@ -10,10 +10,22 @@ fi
 
 # Key bindings
 # ------------
-source "/usr/local/opt/fzf/shell/key-bindings.bash"
+# 2020-12-16 bstiles: FZF Broke C-t handling. Previously, we could
+# just re-bind C-t to transpose, but now that breaks C-r for some reason.
+if [[ $(shasum /usr/local/opt/fzf/shell/key-bindings.bash) != '88798cce0b5eaa9c840ab378407397df3c5e5ff4  /usr/local/opt/fzf/shell/key-bindings.bash' ]]; then
+    cat <<EOF
+WARNING!
+WARNING! .fzf.bash:
+WARNING! /usr/local/opt/fzf/shell/key-bindings.bash has changed.
+WARNING! Synchronize with ~/Config/dotfiles/fzf-fix-key-bindings.bash
+WARNING!
+EOF
+fi
+#source "/usr/local/opt/fzf/shell/key-bindings.bash"
+source ~/.fzf-fix-key-bindings.bash
 
 # 2020-02-15 bstiles: Take back C-t
-bind '"\C-t": transpose-chars'
+# bind '"\C-t": transpose-chars'
 
 # 2020-02-12 bstiles: Customizations
 

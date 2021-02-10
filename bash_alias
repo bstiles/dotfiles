@@ -113,6 +113,9 @@ alias nr='nim c -r --verbosity:0 --hints:off'
 ######################################################################
 ## Monkey
 
+alias cdnb="cd \"\$($HOME/bin/on-the-path/monkey nb --select-dir)\""
 alias m=$HOME/bin/on-the-path/monkey
 alias mt="$HOME/bin/on-the-path/monkey test"
+alias nb="$HOME/bin/on-the-path/monkey nb"
+alias nbg="$HOME/bin/on-the-path/monkey nb --grep"
 alias sk="$HOME/bin/on-the-path/monkey as sk -c"
