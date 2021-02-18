@@ -24,7 +24,6 @@ func = bold
 
 [github]
 user = bstiles
-token = e779ba6bfe01ffa4d9b72e9bd375a46f
 
 [alias]
 common-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -

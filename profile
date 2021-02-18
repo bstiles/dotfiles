@@ -132,8 +132,7 @@ fi
 
 if [[ -x /usr/libexec/java_home ]]; then
     export JAVA_VERSION=11
-    # export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
-    export JAVA_HOME=$(ls -1d "/Users/$USER/Library/Application Support/JetBrains/Toolbox/apps/IDEA-U/"*/*"/IntelliJ IDEA.app/Contents/jbr/Contents/Home" | tail -1)
+    export JAVA_HOME=$(/usr/libexec/java_home -version $JAVA_VERSION)
 fi
 export MACHINE_STORAGE_PATH=~/Machine
 export MY_DOTFILES_DIR=$(dirname -- "$(abs_real_path "${BASH_SOURCE[0]}")")
