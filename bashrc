@@ -247,7 +247,8 @@ project_prompt() {
     local normal="${bg_dark_gray}${fg_white}"
     local tag=${CURRENT_CONTEXT:+$(tr -cd '[:alnum:]_.:-' <<< "$CURRENT_CONTEXT")}
     PS1=$(sed -E \
-              -e 's/\[nested]/['$(( SHLVL - 1 ))'] '$tag'/' \
+              -e 's/\[nested]/['$(( SHLVL - 1 ))']/' \
+              -e 's/(\[[0-9]+])/\1 '${tag:---}'/' \
               -e 's/\\\$/>/' \
               <<< "$PS1")
 }
