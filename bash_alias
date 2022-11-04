@@ -114,6 +114,8 @@ alias nr='nim c -r --verbosity:0 --hints:off'
 ## Monkey
 
 alias m=$HOME/bin/on-the-path/monkey
+alias me="$HOME/bin/on-the-path/monkey env"
+alias mmp="$HOME/bin/on-the-path/monkey mach-ports"
 alias mt="$HOME/bin/on-the-path/monkey test"
 alias nb="$HOME/bin/on-the-path/monkey nb"
 alias nbcd="cd \"\$($HOME/bin/on-the-path/monkey nb --select-dir)\""
@@ -121,5 +123,4 @@ alias nbg="$HOME/bin/on-the-path/monkey nb --grep"
 alias nbp="$HOME/bin/on-the-path/monkey nb --pending"
 alias p=python3
 alias pa='source .venv/bin/activate'
-alias pipin='pip install -r requirements.txt'
-alias sk="$HOME/bin/on-the-path/monkey as sk -c"
+alias pipin='pip3 install -r requirements.txt'
