@@ -12,7 +12,7 @@ fi
 # ------------
 # 2020-12-16 bstiles: FZF Broke C-t handling. Previously, we could
 # just re-bind C-t to transpose, but now that breaks C-r for some reason.
-if [[ $(shasum /usr/local/opt/fzf/shell/key-bindings.bash) != '88798cce0b5eaa9c840ab378407397df3c5e5ff4  /usr/local/opt/fzf/shell/key-bindings.bash' ]]; then
+if [[ $(shasum /usr/local/opt/fzf/shell/key-bindings.bash) != '4fd64b023321cfa7be1b243fb744d2e3e857e9df  /usr/local/opt/fzf/shell/key-bindings.bash' ]]; then
     cat <<EOF
 WARNING!
 WARNING! .fzf.bash:
