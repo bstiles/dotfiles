@@ -16,6 +16,7 @@ format = man
 
 [color]
 diff = auto
+head = reverse
 
 [color.diff]
 frag = white reverse
@@ -28,14 +29,14 @@ user = bstiles
 [alias]
 common-ancestor = !bash -c 'diff --old-line-format='' --new-line-format='' <(git rev-list --first-parent "${1:-master}") <(git rev-list --first-parent "${2:-HEAD}") | head -1' -
 l = log \
-        --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an%C(reset) %<(50,trunc)%s %C(yellow)%D%C(reset)' \
+        --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an%C(reset) %<(50,trunc)%s %C(auto)%D%C(reset)' \
         --abbrev-commit \
         --date=relative
 lg = !git l --graph --date-order
-lga = !git l --graph --date-order --all
+lga = !git l --graph --date-order --all --not --remotes=origin/dependabot
 ld = !git l --simplify-by-decoration \
-            --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an %C(yellow)%D%C(reset) %s'
-lda = !git ld --graph --date-order --all
+            --pretty=tformat:'%C(red)%h%C(green)%>(14)%cr %C(cyan)%<(12,trunc)%an %C(auto)%D%C(reset) %s'
+lda = !git ld --graph --date-order --all --not --remotes=origin/dependabot
 li = ls-files --others --ignored --exclude-standard
 lnm = !git l --no-merges
 s = status
@@ -105,3 +106,7 @@ $(git for-each-ref \
 
 [web]
 browser = open
+[pull]
+	ff = only
+[init]
+	defaultBranch = main
