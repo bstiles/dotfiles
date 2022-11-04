@@ -242,6 +242,7 @@ project_prompt() {
     # prompt_info must be the first statement.
     prompt_info
     echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history
+    echo $$ $USER "$(history 1)" >> ~/.bash_eternal_history${CURRENT_CONTEXT:+_for_$CURRENT_CONTEXT}
     local off="\[${default}\]"
     local highlight="${bg_dark_gray}${fg_white_intense}"
     local normal="${bg_dark_gray}${fg_white}"
