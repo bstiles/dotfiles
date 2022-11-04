@@ -73,6 +73,7 @@ fi
 if [[ $(uname -s) = Darwin ]]; then
     PATH=/usr/local/bin:/usr/local/sbin:$PATH
     PATH=$PATH:"/Applications/VMware Fusion.app/Contents/Library"
+    PATH=$PATH:"/Applications/VMware Fusion.app/Contents/Public"
 fi
 # 2015-05-19 bstiles: OCaml support
 if [[ -d $HOME/.opam/system/bin ]]; then
@@ -112,8 +113,9 @@ fi
 
 # Setting PATH for Python 3.7
 # The original version is saved in .bash_profile.pysave
-PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
-export PATH
+# 2021-06-12 bstiles: Commented to let Homebrew's Python take precedence.
+# PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:${PATH}"
+# export PATH
 
 # 2014-06-25 bstiles: path to selectively override existing items on the path.
 # This must be executed last so that overrides is at the head of the path.
